@@ -51,3 +51,7 @@ node --test string-validator/tests/test_filter.cjs
 Контракт: string-validator/contract.md. Источник: string-validator/ORIGIN.md.
 Экспорт рабочего n8n workflow хранится отдельным JSON в корне репозитория.
 Секреты и содержимое Data Table в исходный код не добавлять.
+
+## Материалы ДЗ 7.1
+
+[Отчёт по ДЗ 7.1](hw7.1.md): ответы на вопросы ревьювера, ссылки на рабочий экспорт n8n, тестовый PR и скриншоты.
