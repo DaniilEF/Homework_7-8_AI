@@ -20,6 +20,6 @@ export default defineConfig({
     command: 'pnpm exec vite --host 127.0.0.1 --port 5174 --strictPort',
     url: 'http://127.0.0.1:5174',
     reuseExistingServer: false,
-    env: { VITE_ITEMS_WEBHOOK_URL: 'https://validator.test/items' },
+    env: { VITE_ITEMS_WEBHOOK_URL: 'https://validator.test/items', HW8_TEST_SERVER: '1' },
   },
 })

@@ -108,6 +108,13 @@ function Start-Frontend {
             if ($response.StatusCode -ne 200 -or $response.Content -notmatch '/src/main.tsx') {
                 throw 'Unexpected response from the existing dev server.'
             }
+            $entry = Invoke-WebRequest -Uri "$address/src/main.tsx" -UseBasicParsing -TimeoutSec 10
+            $dependencyPaths = [regex]::Matches($entry.Content, '["''](/node_modules/[^"'']+)["'']')
+            if ($dependencyPaths.Count -eq 0) { throw 'The React entry module has no resolved dependencies.' }
+            foreach ($dependency in $dependencyPaths) {
+                $module = Invoke-WebRequest -Uri ($address + $dependency.Groups[1].Value) -UseBasicParsing -TimeoutSec 10
+                if ($module.StatusCode -ne 200) { throw 'A React dependency did not load.' }
+            }
         } catch {
             throw "This project's server already owns port 5173 but is not responding correctly. Check its terminal. $($_.Exception.Message)"
         }
