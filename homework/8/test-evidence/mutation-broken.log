@@ -1,0 +1,1548 @@
+
+ RUN  v5.1.0 C:/Users/danho/Homework_7-8_AI/homework/8/frontend
+
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > shows the labelled form, rules and complete initial list
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > selects an example, updates the counter and focuses input without submitting
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > submits with Enter and displays the returned list, then resets and restores focus
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > keeps results tied to the sent query while the input is edited
+ × tests/interface.test.tsx > Валидация формы > rejects @@@ without sending a request and clears the old error on edit 1318ms
+   → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m3[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m3[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+ × tests/interface.test.tsx > Валидация формы > rejects Привет without sending a request and clears the old error on edit 1171ms
+   → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m6[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m6[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+ × tests/interface.test.tsx > Валидация формы > rejects aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa without sending a request and clears the old error on edit 1629ms
+   → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums font-medium text-destructive"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m41[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [3...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums font-medium text-destructive"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m41[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [3...
+ ↓ tests/interface.test.tsx > Валидация формы > accepts an empty query and displays the full response
+ ↓ tests/interface.test.tsx > Валидация формы > accepts exactly 40 characters and sends the exact untrimmed value
+ ↓ tests/interface.test.tsx > Валидация формы > shows a field error for server-side HTTP 400 even when local validation passed
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows an empty state for an empty HTTP 200 response
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows loading, preserves the previous list and permits only one request for double click and repeated Enter
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > guards synchronous repeated submit events before React rerenders the disabled button
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > preserves input and previous results on HTTP 500, and retry sends the current input
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows a recoverable error on a network failure
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > cancels on reset and ignores an obsolete response while a new search is in progress
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 13 skipped (16)
+   Start at  23:05:44
+   Duration  7.21s (tests 59%, environment 21%, setup 11%, import 8%, transform 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/interface.test.tsx > Валидация формы > rejects @@@ without sending a request and clears the old error on edit
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m3[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m3[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ tests/interface.test.tsx:80:25
+     78|     await user.type(input, value)
+     79|     await user.click(button)
+     80|     expect(await screen.findByRole('alert')).toHaveTextContent('Недопу…
+       |                         ^
+     81|     expect(input).toHaveAttribute('aria-invalid', 'true')
+     82|     expect(input).toHaveValue(value)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/interface.test.tsx > Валидация формы > rejects Привет without sending a request and clears the old error on edit
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m6[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums text-muted-foreground"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m6[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [33mtype[...
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ tests/interface.test.tsx:80:25
+     78|     await user.type(input, value)
+     79|     await user.click(button)
+     80|     expect(await screen.findByRole('alert')).toHaveTextContent('Недопу…
+       |                         ^
+     81|     expect(input).toHaveAttribute('aria-invalid', 'true')
+     82|     expect(input).toHaveValue(value)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/interface.test.tsx > Валидация формы > rejects aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa without sending a request and clears the old error on edit
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums font-medium text-destructive"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m41[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [3...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-8 px-4 py-8 md:px-8 md:py-12"[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"flex items-start gap-4"[39m
+      [36m>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"lucide lucide-shield-check size-6"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m9 12 2 2 4-4"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+        [36m</span>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-1"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-semibold tracking-tight text-balance md:text-3xl"[39m
+          [36m>[39m
+            [0mВалидатор строк[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-pretty text-muted-foreground"[39m
+          [36m>[39m
+            [0mПроверка строки по правилам и поиск совпадений в списке элементов.[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-col gap-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl"[39m
+            [33mdata-size[39m=[32m"default"[39m
+            [33mdata-slot[39m=[32m"card"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-header"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"font-medium group-data-[size=sm]/card:text-sm text-lg"[39m
+                [33mdata-slot[39m=[32m"card-title"[39m
+              [36m>[39m
+                [0mПоиск[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+                [33mdata-slot[39m=[32m"card-description"[39m
+              [36m>[39m
+                [0mСтрока проверяется по правилам, затем выполняется поиск по списку.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"px-(--card-spacing)"[39m
+              [33mdata-slot[39m=[32m"card-content"[39m
+            [36m>[39m
+              [36m<form[39m
+                [33mclass[39m=[32m"flex flex-col gap-4"[39m
+                [33mnovalidate[39m=[32m""[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"flex flex-col gap-2"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"flex items-baseline justify-between gap-2"[39m
+                  [36m>[39m
+                    [36m<label[39m
+                      [33mclass[39m=[32m"flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"[39m
+                      [33mdata-slot[39m=[32m"label"[39m
+                      [33mfor[39m=[32m"query"[39m
+                    [36m>[39m
+                      [0mСтрока для проверки[0m
+                    [36m</label>[39m
+                    [36m<span[39m
+                      [33mclass[39m=[32m"font-mono text-xs tabular-nums font-medium text-destructive"[39m
+                      [33mid[39m=[32m"query-counter"[39m
+                    [36m>[39m
+                      [0m41[0m
+                      [0m / [0m
+                      [0m40[0m
+                      [36m<span[39m
+                        [33mclass[39m=[32m"sr-only"[39m
+                      [36m>[39m
+                        [0m символов[0m
+                      [36m</span>[39m
+                    [36m</span>[39m
+                  [36m</div>[39m
+                  [36m<input[39m
+                    [33maria-describedby[39m=[32m"query-hint query-counter query-error"[39m
+                    [33maria-invalid[39m=[32m"true"[39m
+                    [33mautocomplete[39m=[32m"off"[39m
+                    [33mclass[39m=[32m"w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-10 font-mono text-base md:text-sm"[39m
+                    [33mdata-slot[39m=[32m"input"[39m
+                    [33mid[39m=[32m"query"[39m
+                    [33mname[39m=[32m"query"[39m
+                    [33mplaceholder[39m=[32m"Например, alp"[39m
+                    [33mspellcheck[39m=[32m"false"[39m
+                    [3...
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ tests/interface.test.tsx:80:25
+     78|     await user.type(input, value)
+     79|     await user.click(button)
+     80|     expect(await screen.findByRole('alert')).toHaveTextContent('Недопу…
+       |                         ^
+     81|     expect(input).toHaveAttribute('aria-invalid', 'true')
+     82|     expect(input).toHaveValue(value)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯

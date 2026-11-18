@@ -1,0 +1,2 @@
+$ node verify-test-quality.mjs
+PASS: hidden validation message failed the tests; restored source passed. Source hash unchanged.
