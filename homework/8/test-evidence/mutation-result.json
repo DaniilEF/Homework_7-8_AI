@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-11-18T20:05:56.809Z",
+  "mutation": "Hide validation error message in SearchForm",
+  "test": "without sending a request (three invalid-input cases)",
+  "brokenExitCode": 1,
+  "restoredExitCode": 0,
+  "originalSha256": "2f5be85141b5162f0516c5f2f4e1927ec3ea70356e38ba0929e3c4db50e1176c",
+  "restoredSha256": "2f5be85141b5162f0516c5f2f4e1927ec3ea70356e38ba0929e3c4db50e1176c"
+}

@@ -1,0 +1,121 @@
+{
+  "name": "HW 8 — String Validator API",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "hw8-string-validator-items",
+        "authentication": "none",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "8a2a8c27-9883-4f5a-96db-667d6b6d8dd0",
+      "name": "Items Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "a3c07f79-8ba5-434b-9f83-c1a3ba3e7836"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const params = $input.first().json.query;\nif (!params || typeof params !== 'object' || Array.isArray(params)\n    || !Object.prototype.hasOwnProperty.call(params, 'query')\n    || typeof params.query !== 'string') {\n  return [{json: {statusCode: 400, body: {error: {\n    code: 'INVALID_REQUEST',\n    message: 'Передайте один строковый параметр query. Для полного списка используйте query=.'\n  }}}}];\n}\nreturn [{json: {query: params.query}}];"
+      },
+      "id": "c8b5e859-069b-4e33-8639-b6be86271931",
+      "name": "Check Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const request = $input.first().json;\nif (request.statusCode !== undefined) return [{json: request}];\n\n// Dataset from string-validator/ui/items.json. Input is never trimmed or truncated.\nconst items = [\n  {id: '1', name: 'Alpha'},\n  {id: '2', name: 'Beta'},\n  {id: '3', name: 'Gamma'},\n  {id: '4', name: 'Delta'},\n  {id: '5', name: 'Omega'}\n];\nconst query = request.query;\nconst allowedCharacter = /^[a-zA-Z0-9\\s]$/u;\nconst valid = query.length <= 40\n  && Array.from(query).every(character => allowedCharacter.test(character));\nif (!valid) {\n  return [{json: {statusCode: 400, body: {error: {\n    code: 'INVALID_FILTER',\n    message: 'Недопустимый фильтр. Используйте латинские буквы, цифры и пробельные символы, до 40 символов.'\n  }}}}];\n}\nconst lowerQuery = query.toLowerCase();\nconst result = query === '' ? items\n  : items.filter(item => item.name.toLowerCase().includes(lowerQuery));\nreturn [{json: {statusCode: 200, body: {items: result}}}];"
+      },
+      "id": "c568905f-9585-43c8-b208-14d4ac73f8d7",
+      "name": "Validate and Filter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      },
+      "id": "2531f560-c303-4fa4-89b9-a24db95483cf",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        780,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Items Webhook": {
+      "main": [
+        [
+          {
+            "node": "Check Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Request": {
+      "main": [
+        [
+          {
+            "node": "Validate and Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and Filter": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": []
+}

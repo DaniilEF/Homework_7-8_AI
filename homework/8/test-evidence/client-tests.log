@@ -1,0 +1,33 @@
+$ pnpm test && pnpm test:e2e
+$ vitest run
+
+ RUN  v5.1.0 C:/Users/danho/Homework_7-8_AI/homework/8/frontend
+
+
+ Test Files  2 passed (2)
+      Tests  25 passed (25)
+   Start at  23:05:20
+   Duration  8.03s (tests 44%, environment 30%, setup 17%, import 7%, transform 2%)
+
+$ playwright test
+[WebServer] (node:18468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 2 workers
+
+(node:45292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [desktop] › e2e\scenario.spec.ts:37:1 › loading prevents duplicate requests and HTTP error can be retried with current input (3.0s)
+  ok 1 [desktop] › e2e\scenario.spec.ts:8:1 › keyboard scenario: input → server result → empty → validation → reset (3.0s)
+(node:42788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 [mobile] › e2e\scenario.spec.ts:8:1 › keyboard scenario: input → server result → empty → validation → reset (3.4s)
+  ok 4 [mobile] › e2e\scenario.spec.ts:37:1 › loading prevents duplicate requests and HTTP error can be retried with current input (3.3s)
+
+  4 passed (12.9s)

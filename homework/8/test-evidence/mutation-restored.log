@@ -1,0 +1,24 @@
+
+ RUN  v5.1.0 C:/Users/danho/Homework_7-8_AI/homework/8/frontend
+
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > shows the labelled form, rules and complete initial list
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > selects an example, updates the counter and focuses input without submitting
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > submits with Enter and displays the returned list, then resets and restores focus
+ ↓ tests/interface.test.tsx > Компоненты и взаимодействия > keeps results tied to the sent query while the input is edited
+ ✓ tests/interface.test.tsx > Валидация формы > rejects @@@ without sending a request and clears the old error on edit 361ms
+ ✓ tests/interface.test.tsx > Валидация формы > rejects Привет without sending a request and clears the old error on edit 212ms
+ ✓ tests/interface.test.tsx > Валидация формы > rejects aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa without sending a request and clears the old error on edit 640ms
+ ↓ tests/interface.test.tsx > Валидация формы > accepts an empty query and displays the full response
+ ↓ tests/interface.test.tsx > Валидация формы > accepts exactly 40 characters and sends the exact untrimmed value
+ ↓ tests/interface.test.tsx > Валидация формы > shows a field error for server-side HTTP 400 even when local validation passed
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows an empty state for an empty HTTP 200 response
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows loading, preserves the previous list and permits only one request for double click and repeated Enter
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > guards synchronous repeated submit events before React rerenders the disabled button
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > preserves input and previous results on HTTP 500, and retry sends the current input
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > shows a recoverable error on a network failure
+ ↓ tests/interface.test.tsx > Подменённые ответы сервера и состояния > cancels on reset and ignores an obsolete response while a new search is in progress
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 13 skipped (16)
+   Start at  23:05:52
+   Duration  4.24s (environment 35%, tests 31%, setup 18%, import 13%, transform 3%)
