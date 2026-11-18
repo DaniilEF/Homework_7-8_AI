@@ -1,0 +1,480 @@
+{
+  "name": "HW 7.2 — Issue Triage",
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "DaniilEF"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Homework_7-8_AI"
+        },
+        "events": [
+          "issues"
+        ],
+        "options": {}
+      },
+      "id": "c7116eec-ac02-4dce-8214-a66709eb7916",
+      "name": "New GitHub Issue",
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        272
+      ],
+      "webhookId": "ef82e4ce-8cee-4829-9924-a211830fe214",
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function normalizeIssue(raw) {\n  const b = raw.body && typeof raw.body === 'object' ? raw.body : raw;\n  if (b.action !== 'opened' || !b.issue || b.issue.pull_request ||\n      b.repository?.full_name !== 'DaniilEF/Homework_7-8_AI') return null;\n  if (!Number.isSafeInteger(b.issue.number) || b.issue.number < 1) throw Error('Invalid issue number');\n  if (typeof b.issue.title !== 'string' || !b.issue.title.trim()) throw Error('Missing issue title');\n  const body = b.issue.body ?? '';\n  if (typeof body !== 'string' || body.length + b.issue.title.length > 20000) throw Error('Issue text too large or invalid');\n  return {repo_full_name:b.repository.full_name,issue_number:b.issue.number,\n    issue_id:b.issue.id,title:b.issue.title,body,\n    api_labels:`https://api.github.com/repos/${b.repository.full_name}/issues/${b.issue.number}/labels`};\n}\nconst e=normalizeIssue($input.first().json);return e?[{json:e}]:[];"
+      },
+      "id": "38503f63-98a5-4a51-bcd0-5884f4c77f78",
+      "name": "Normalize Issue",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "MOI6m2YTHY8QGGuJ",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/MOI6m2YTHY8QGGuJ",
+          "cachedResultName": "HW 7.2 — Issue Classifier"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "title": "={{ $json.title }}",
+            "body": "={{ $json.body }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "808cf22b-c7db-4d0e-95aa-5ba8827f0ad4",
+      "name": "Call Issue Classifier",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function normalizeClassification(raw) {\n  // Chain versions may wrap parsed output as text or output.\n  let result = raw?.output ?? raw?.text ?? raw;\n  if (typeof result === 'string') {\n    try {result = JSON.parse(result);} catch {return {type:'unknown',confidence:0};}\n  }\n  if (!result || typeof result !== 'object' || Array.isArray(result) || raw?.error ||\n      !['bug','task','feature','unknown'].includes(result.type) ||\n      typeof result.confidence !== 'number' || !Number.isFinite(result.confidence) ||\n      result.confidence < 0 || result.confidence > 1) return {type:'unknown',confidence:0};\n  return {type:result.type,confidence:result.type === 'unknown' ? Math.min(result.confidence,0.79) : result.confidence};\n}\nfunction routeClassification(result) {\n  const r = normalizeClassification(result);\n  return {...r,label:r.confidence < 0.8 || r.type === 'unknown' ? 'needs-triage' : r.type};\n}\nconst items=$input.all();if(items.length!==1)throw Error('Expected exactly one classifier response');\nconst result=routeClassification(items[0].json);const issue=$('Normalize Issue').first().json;\nreturn [{json:{...issue,...result}}];"
+      },
+      "id": "147915ee-b60a-4a75-a113-a43b229e760d",
+      "name": "Validate and Route",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        784,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f485df7e-0c85-4acb-95c4-85c685355306",
+                    "leftValue": "={{ $json.label }}",
+                    "rightValue": "bug",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "bug"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "da89e2ef-12e6-488f-92dd-be13c778964f",
+                    "leftValue": "={{ $json.label }}",
+                    "rightValue": "task",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "task"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a1d0fd5a-6ce3-464a-a98c-db98c802beeb",
+                    "leftValue": "={{ $json.label }}",
+                    "rightValue": "feature",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "feature"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e0a5a6c3-fa6a-4f50-8c67-2db5f13ac1ff",
+                    "leftValue": "={{ $json.label }}",
+                    "rightValue": "needs-triage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "needs-triage"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "7119cb3f-133c-4bfb-b492-2c8685b75da6",
+      "name": "Switch Issue Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1040,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.api_labels }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"labels\":[\"bug\"]}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "756d9b8e-b96a-495b-b8f7-1f9135a9493f",
+      "name": "Label bug",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        0
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.api_labels }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"labels\":[\"task\"]}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "981cb0fd-a637-4d11-9c05-bbfa79e53485",
+      "name": "Label task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        192
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.api_labels }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"labels\":[\"feature\"]}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "4eb26964-9c54-4dec-8288-d87daff6b8f2",
+      "name": "Label feature",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        368
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.api_labels }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"labels\":[\"needs-triage\"]}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "b9591ef6-e74f-4834-bbc5-5dc812d4a6db",
+      "name": "Label needs-triage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        544
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "New GitHub Issue": {
+      "main": [
+        [
+          {
+            "node": "Normalize Issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Issue": {
+      "main": [
+        [
+          {
+            "node": "Call Issue Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Issue Classifier": {
+      "main": [
+        [
+          {
+            "node": "Validate and Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and Route": {
+      "main": [
+        [
+          {
+            "node": "Switch Issue Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Issue Type": {
+      "main": [
+        [
+          {
+            "node": "Label bug",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Label task",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Label feature",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Label needs-triage",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Label needs-triage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "e3375b84-153c-4a97-85e3-b80e34d83b33",
+  "meta": {
+    "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"
+  },
+  "nodeGroups": [],
+  "id": "ENlBzVy5PrZZlpey",
+  "tags": []
+}

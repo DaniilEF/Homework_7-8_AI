@@ -1,0 +1,491 @@
+{
+  "name": "HW 7.2 — Weekly Issues Report",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "66865f6e-399e-4125-bcd9-a39af8be592b",
+      "name": "Run Report Manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * MON"
+            }
+          ]
+        }
+      },
+      "id": "8a0c04b3-e31f-4511-807e-d33b3f8cf785",
+      "name": "Monday 09 Moscow",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const config={\n  repo:'DaniilEF/Homework_7-8_AI',\n  recipient:'danplayer39rus@gmail.com',\n  startISO:'',\n  endISO:''\n};\nreturn [{json:config}];"
+      },
+      "id": "96c605ec-58c4-491b-9b29-0212fa3d7ae1",
+      "name": "Report Settings",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function prepareWindow(config,now=new Date()) {\n  if(!/^[A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+$/.test(config.repo))throw Error('Invalid repo');\n  if(typeof config.recipient!=='string'||!/^\\S+@\\S+\\.\\S+$/.test(config.recipient))throw Error('Set recipient email in Report Settings');\n  const end=new Date(config.endISO||now);end.setUTCMilliseconds(0);\n  const start=config.startISO?new Date(config.startISO):new Date(end.getTime()-7*86400000);\n  start.setUTCMilliseconds(0);\n  if(!Number.isFinite(start.getTime())||!Number.isFinite(end.getTime())||start>=end)throw Error('Invalid report window');\n  const iso=d=>d.toISOString().replace('.000Z','Z');\n  // GitHub ranges are inclusive; end-minus-one-second implements [start,end).\n  const prefix=`repo:${config.repo} is:issue created:${iso(start)}..${iso(new Date(end.getTime()-1000))}`;\n  return {repo:config.repo,recipient:config.recipient,start:iso(start),end:iso(end),queries:{\n    all:prefix,bug:prefix+' label:bug',task:prefix+' label:task',feature:prefix+' label:feature'}};\n}\nreturn [{json:prepareWindow($input.first().json)}];"
+      },
+      "id": "e516586d-93f6-4a80-82fb-6977e8339e6e",
+      "name": "Report Window",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/search/issues",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Report Window').first().json.queries.all }}"
+            },
+            {
+              "name": "per_page",
+              "value": "100"
+            },
+            {
+              "name": "page",
+              "value": "1"
+            },
+            {
+              "name": "sort",
+              "value": "created"
+            },
+            {
+              "name": "order",
+              "value": "asc"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "id": "c62bef26-19db-4d7e-8f8d-38a857165fbb",
+      "name": "Search all Issues",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        784,
+        112
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/search/issues",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Report Window').first().json.queries.bug }}"
+            },
+            {
+              "name": "per_page",
+              "value": "100"
+            },
+            {
+              "name": "page",
+              "value": "1"
+            },
+            {
+              "name": "sort",
+              "value": "created"
+            },
+            {
+              "name": "order",
+              "value": "asc"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "id": "121f7db5-dd6a-4453-853a-2e87d56c3f77",
+      "name": "Search bug Issues",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1024,
+        112
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/search/issues",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Report Window').first().json.queries.task }}"
+            },
+            {
+              "name": "per_page",
+              "value": "100"
+            },
+            {
+              "name": "page",
+              "value": "1"
+            },
+            {
+              "name": "sort",
+              "value": "created"
+            },
+            {
+              "name": "order",
+              "value": "asc"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "id": "10df7dc2-e72a-464d-8073-11e4f414782c",
+      "name": "Search task Issues",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1264,
+        112
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/search/issues",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Report Window').first().json.queries.feature }}"
+            },
+            {
+              "name": "per_page",
+              "value": "100"
+            },
+            {
+              "name": "page",
+              "value": "1"
+            },
+            {
+              "name": "sort",
+              "value": "created"
+            },
+            {
+              "name": "order",
+              "value": "asc"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        }
+      },
+      "id": "4d671c9a-562d-4c67-811e-e2daeb94cb68",
+      "name": "Search feature Issues",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1504,
+        112
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "rnLuKaLKBIdKA3tu",
+          "name": "GitHub account 34"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function collectStatistics(window,responses) {\n  const datasets={};\n  for(const kind of ['all','bug','task','feature']) {\n    const r=responses[kind];\n    if(!r||!Array.isArray(r.items)||!Number.isInteger(r.total_count)||r.incomplete_results)throw Error('Incomplete/invalid GitHub search: '+kind);\n    if(r.total_count>100||r.items.length!==r.total_count)throw Error('Search exceeds 100 results or is truncated: '+kind+'. Narrow the report interval.');\n    const seen=new Set();\n    datasets[kind]=r.items.filter(i=>{\n      if(!i.id||i.pull_request||!i.user?.login||!Array.isArray(i.labels))throw Error('Invalid issue in '+kind);\n      const created=Date.parse(i.created_at);\n      if(!Number.isFinite(created)||created<Date.parse(window.start)||created>=Date.parse(window.end))throw Error('Issue outside requested interval');\n      if(seen.has(i.id))throw Error('Duplicate search item');seen.add(i.id);return true;\n    });\n  }\n  const allIDs=new Set(datasets.all.map(i=>i.id));\n  for(const kind of ['bug','task','feature']){\n    if(datasets[kind].some(i=>!allIDs.has(i.id)))throw Error('Search snapshots disagree; retry after GitHub indexing');\n    const labelIDs=new Set(datasets[kind].map(i=>i.id));\n    const fromAll=datasets.all.filter(i=>i.labels.some(l=>(typeof l==='string'?l:l.name)===kind));\n    if(fromAll.length!==labelIDs.size||fromAll.some(i=>!labelIDs.has(i.id)))throw Error('Label search differs from all issues; retry after GitHub indexing');\n  }\n  const types=['bug','task','feature','needs-triage','unclassified','conflicting-labels'];\n  const byType=Object.fromEntries(types.map(t=>[t,0]));const byAuthor=new Map();\n  for(const issue of datasets.all){\n    const labels=new Set(issue.labels.map(l=>typeof l==='string'?l:l.name));\n    const candidates=['bug','task','feature','needs-triage'].filter(t=>labels.has(t));\n    const kind=candidates.length===0?'unclassified':candidates.length>1?'conflicting-labels':candidates[0];\n    byType[kind]++;\n    const author=issue.user.login;\n    if(!byAuthor.has(author))byAuthor.set(author,{author,total:0,...Object.fromEntries(types.map(t=>[t,0]))});\n    byAuthor.get(author).total++;byAuthor.get(author)[kind]++;\n  }\n  return {...window,total:datasets.all.length,byType,byAuthor:[...byAuthor.values()].sort((a,b)=>b.total-a.total||a.author.localeCompare(b.author)),\n    queryCounts:Object.fromEntries(Object.entries(datasets).map(([k,v])=>[k,v.length]))};\n}\nconst w=$('Report Window').first().json;\nconst datasets={all:$('Search all Issues').first().json,bug:$('Search bug Issues').first().json,task:$('Search task Issues').first().json,feature:$('Search feature Issues').first().json};\nreturn [{json:collectStatistics(w,datasets)}];"
+      },
+      "id": "9aa70bb0-0391-4bd5-87f9-469fa76eb107",
+      "name": "Group by Type and Author",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function buildEmail(stats) {\n  const escape=s=>String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));\n  const caption={bug:'Ошибки',task:'Технические задачи',feature:'Новые возможности','needs-triage':'Требуют разбора',unclassified:'Без классификации','conflicting-labels':'Несколько классификационных лейблов'};\n  const cell=s=>'<td style=\"border:1px solid #cbd5e1;padding:8px\">'+escape(s)+'</td>';\n  const table=(heads,rows)=>'<table style=\"border-collapse:collapse;margin-bottom:24px\"><thead><tr>'+heads.map(h=>'<th style=\"text-align:left;border:1px solid #cbd5e1;padding:8px;background:#eef2ff\">'+escape(h)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(cell).join('')+'</tr>').join('')+'</tbody></table>';\n  const keys=Object.keys(caption);\n  const byType=keys.map(k=>[k,caption[k],stats.byType[k]]);\n  const byAuthor=stats.byAuthor.map(a=>[a.author,a.total,...keys.map(k=>a[k])]);\n  const html='<!doctype html><html lang=\"ru\"><body style=\"font-family:Arial,sans-serif;color:#172033\"><h1>Недельный отчёт по Issues</h1><p>Репозиторий: '+escape(stats.repo)+'</p><p>Период UTC: '+escape(stats.start)+' — '+escape(stats.end)+' (конец не включён).</p><p><strong>Создано Issues: '+stats.total+'</strong></p>'+\n    (stats.total===0?'<p>За этот период новых Issues нет.</p>':'')+'<h2>По типам</h2>'+table(['Тип','Описание','Количество'],byType)+'<h2>По авторам</h2>'+\n    table(['Автор','Всего',...keys],byAuthor)+'<p>Считаются Issues, созданные за последние 7 суток, по текущим лейблам. Pull requests исключены. Авторы — создатели Issues. Закрытые Issues также учитываются, если созданы в этом периоде.</p><p>Четыре запроса: все Issues, bug, task и feature. Issues без лейбла, с needs-triage и конфликтующими лейблами не теряются и не считаются дважды.</p></body></html>';\n  return {sendTo:stats.recipient,subject:`GitHub Issues: ${stats.repo} | ${stats.start.slice(0,10)} — ${stats.end.slice(0,10)}`,html};\n}\nreturn [{json:buildEmail($input.first().json)}];"
+      },
+      "id": "a269040c-482b-42bb-8561-a5b809fee8bf",
+      "name": "Build HTML Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1984,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.sendTo }}",
+        "subject": "={{ $json.subject }}",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "082ca1fd-7b81-4c2f-97b6-8326920e1181",
+      "name": "Send Gmail Report",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2224,
+        112
+      ],
+      "webhookId": "f2509a2f-9b37-4ce3-be52-1d09ff68d0e8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ajPXvRvSmOypB4dE",
+          "name": "Gmail account 5"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Run Report Manually": {
+      "main": [
+        [
+          {
+            "node": "Report Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monday 09 Moscow": {
+      "main": [
+        [
+          {
+            "node": "Report Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Report Settings": {
+      "main": [
+        [
+          {
+            "node": "Report Window",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Report Window": {
+      "main": [
+        [
+          {
+            "node": "Search all Issues",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search all Issues": {
+      "main": [
+        [
+          {
+            "node": "Search bug Issues",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search bug Issues": {
+      "main": [
+        [
+          {
+            "node": "Search task Issues",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search task Issues": {
+      "main": [
+        [
+          {
+            "node": "Search feature Issues",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search feature Issues": {
+      "main": [
+        [
+          {
+            "node": "Group by Type and Author",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Group by Type and Author": {
+      "main": [
+        [
+          {
+            "node": "Build HTML Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build HTML Report": {
+      "main": [
+        [
+          {
+            "node": "Send Gmail Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f728e4ed-53ff-4035-9f8e-0eba99a9281a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"
+  },
+  "nodeGroups": [],
+  "id": "2CWO37cqKI6lUWLS",
+  "tags": []
+}
