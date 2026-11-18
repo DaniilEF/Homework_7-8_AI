@@ -1,5 +1,15 @@
 # ДЗ 8 — интерфейс сервиса поверх n8n
 
+## Командная строка Windows (cmd)
+
+Рабочий каталог:
+
+```cmd
+cd /d C:\Users\danho\Homework_7-8_AI
+```
+
+Во всех командах ниже PowerShell вызывается явно из cmd. Установка выполняется через setup, сервер запускается через dev. Пока сервер работает, команды test, quality и build выполняются в другом окне cmd из того же каталога. Проверка quality запускается после завершения test.
+
 ## 1. AI-прототип и работающий интерфейс
 
 Приложение проверяет строку по заданным правилам и ищет совпадения в списке Alpha, Beta, Gamma, Delta, Omega. Основной сценарий: ввод → отправка формы → проверка и поиск → видимый результат.
@@ -23,20 +33,20 @@ React отправляет строку в настоящий webhook n8n. Check
 
 ### Запуск
 
-Команды выполняются из корня репозитория в PowerShell:
+Команды выполняются из корня репозитория в cmd. Скрипт .ps1 запускается через powershell -NoProfile -File, чтобы cmd выполнял его, а не открывал в редакторе:
 
-```powershell
-.\defense.ps1 setup
-.\defense.ps1 workflow
-.\defense.ps1 dev
+```cmd
+powershell -NoProfile -File .\defense.ps1 setup
+powershell -NoProfile -File .\defense.ps1 workflow
+powershell -NoProfile -File .\defense.ps1 dev
 ```
 
 `setup` проверяет Node.js и pnpm. При их отсутствии на Windows устанавливает portable Node.js 24.22.3 и pnpm 11.25.0 в `%LOCALAPPDATA%\HomeworkTools`, без прав администратора и постоянных изменений PATH. Архив Node.js проверяется по официальному SHA-256. Затем устанавливаются зависимости и создаётся `.env.local` из примера, только если файла ещё нет. Все действия defense.ps1 автоматически используют локальные инструменты. `workflow` проверяет экспортированную логику нод локально. `dev` запускает рабочий экран на http://127.0.0.1:5173. Если этот проект уже работает на порту 5173, команда проверяет процесс, HTML, входной модуль и загрузку его зависимостей React, затем возвращает адрес без запуска второго экземпляра. Посторонние процессы не останавливаются.
 
 Прототип запускается в другом терминале:
 
-```powershell
-.\defense.ps1 prototype
+```cmd
+powershell -NoProfile -File .\defense.ps1 prototype
 ```
 
 Адрес прототипа выводится Next.js, обычно http://127.0.0.1:3000. Если соответствующий сервер уже работает, повторный запуск не нужен. Реальная интеграция требует сети и опубликованного workflow n8n. Адрес задаётся через `VITE_ITEMS_WEBHOOK_URL`, ключи не используются.
@@ -102,8 +112,8 @@ React отправляет строку в настоящий webhook n8n. Check
 
 Тесты подготовлены с помощью Codex, затем проверены реальными запусками и исправлены. Используются Vitest, Testing Library, MSW и Playwright Test.
 
-```powershell
-.\defense.ps1 test
+```cmd
+powershell -NoProfile -File .\defense.ps1 test
 ```
 
 Команда последовательно выполняет `pnpm test` и `pnpm test:e2e`. Сохранённый успешный результат: **25 Vitest и 4 Playwright**. [Лог полного запуска](test-evidence/client-tests.log).
@@ -151,16 +161,16 @@ HttpResponse.json(
 
 Живая интеграция проверяется отдельно при работающем приложении на 5173:
 
-```powershell
-.\defense.ps1 live
+```cmd
+powershell -NoProfile -File .\defense.ps1 live
 ```
 
 Этот запуск отправляет настоящие запросы. Playwright MCP не использовался; браузерные проверки выполняются через Playwright и Playwright Test.
 
 ## 9. Проверка качества тестов намеренной поломкой
 
-```powershell
-.\defense.ps1 quality
+```cmd
+powershell -NoProfile -File .\defense.ps1 quality
 ```
 
 [Скрипт](frontend/verify-test-quality.mjs) сохраняет исходные байты SearchForm, временно скрывает сообщение валидации и запускает три проверки неверного ввода. Они падают, поскольку пользователь больше не видит alert. Далее в finally восстанавливается исходный файл, проверяется SHA-256 и те же тесты запускаются повторно.
@@ -173,10 +183,28 @@ HttpResponse.json(
 
 Остальные тесты в этом эксперименте отфильтрованы целенаправленно. Верхнеуровневая команда quality завершается успешно, если обнаружила ожидаемое падение и подтвердила восстановление. Она выполняется отдельно от остальных тестов и редактирования SearchForm; во время эксперимента сообщение временно скрывается и в dev-сервере.
 
+### Результаты тестов в консоли cmd
+
+Обычный запуск test выводит результаты Vitest и Playwright непосредственно в терминал. Команда quality выводит общий итог эксперимента, а подробности ожидаемого падения и успешного восстановления сохраняет в файлы:
+
+```cmd
+type homework\8\test-evidence\mutation-broken.log
+type homework\8\test-evidence\mutation-restored.log
+type homework\8\test-evidence\mutation-result.json
+```
+
+Последний сохранённый полный запуск:
+
+```cmd
+type homework\8\test-evidence\client-tests.log
+```
+
+client-tests.log содержит записанный запуск; новый запуск test выводится в консоль и не обновляет этот файл автоматически. Длинный лог можно читать постранично командой `more homework\8\test-evidence\mutation-broken.log`.
+
 Проверка типов и production-сборка:
 
-```powershell
-.\defense.ps1 build
+```cmd
+powershell -NoProfile -File .\defense.ps1 build
 ```
 
 ## 10. Вклад AI и исправления
