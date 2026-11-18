@@ -90,6 +90,33 @@ function Invoke-CheckedPnpm {
     if ($LASTEXITCODE -ne 0) { throw "pnpm failed with exit code $LASTEXITCODE" }
 }
 
+function Start-Frontend {
+    $address = 'http://127.0.0.1:5173'
+    $listeners = @(Get-NetTCPConnection -LocalPort 5173 -State Listen -ErrorAction SilentlyContinue)
+    if ($listeners.Count -gt 0) {
+        $expectedRoot = [IO.Path]::GetFullPath($frontendPath)
+        foreach ($ownerId in ($listeners.OwningProcess | Select-Object -Unique)) {
+            $owner = Get-CimInstance Win32_Process -Filter "ProcessId=$ownerId"
+            if (!$owner -or !$owner.CommandLine -or
+                $owner.CommandLine.IndexOf($expectedRoot, [StringComparison]::OrdinalIgnoreCase) -lt 0 -or
+                $owner.CommandLine -notmatch 'vite') {
+                throw "Port 5173 is used by another application (PID $ownerId). It was not stopped."
+            }
+        }
+        try {
+            $response = Invoke-WebRequest -Uri $address -UseBasicParsing -TimeoutSec 10
+            if ($response.StatusCode -ne 200 -or $response.Content -notmatch '/src/main.tsx') {
+                throw 'Unexpected response from the existing dev server.'
+            }
+        } catch {
+            throw "This project's server already owns port 5173 but is not responding correctly. Check its terminal. $($_.Exception.Message)"
+        }
+        Write-Output "The project is already running: $address"
+        Write-Output 'Using the existing server; no second process was started.'
+        return
+    }
+    Invoke-CheckedPnpm -CommandArguments @('dev')
+}
 try {
     Initialize-Toolchain
     Push-Location $frontendPath
@@ -104,7 +131,7 @@ try {
                     Write-Output 'Keeping existing .env.local.'
                 }
             }
-            'dev' { Invoke-CheckedPnpm -CommandArguments @('dev') }
+            'dev' { Start-Frontend }
             'test' { Invoke-CheckedPnpm -CommandArguments @('test:all') }
             'quality' { Invoke-CheckedPnpm -CommandArguments @('test:quality') }
             'build' { Invoke-CheckedPnpm -CommandArguments @('build') }
