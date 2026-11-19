@@ -5,8 +5,8 @@ const source=fs.readFileSync(path.join(__dirname,'fixtures/base.js'),'utf8');
 const event={config:{repo:'DaniilEF/Homework_7-8_AI',base:'main',allowedLogins:['DaniilEF'],fixModel:'first',reviewModel:'second',maxPolls:2},issue:5,title:'Length validation',description:'Regression example',branch:'autofix/issue-5',regressionPath:'automation/autofix/cases/issue-5.json'};
 function run(name,input,values={},index=0){const context={$input:{first:()=>({json:input})},$:key=>({first:()=>({json:values[key]})}),$runIndex:index,Buffer};const value=vm.runInNewContext(`(function(){${nodes.get(name).parameters.jsCode}})()`,context,{timeout:1000});return JSON.parse(JSON.stringify(value));}
 function fixture(){const context={data:{repository:{base:{oid:'a'.repeat(40),tree:{oid:'b'.repeat(40)},file:{object:{text:source}}},pullRequests:{nodes:[]}}}};const prepared=run('Prepare Fix',context,{'Normalize Bug':event})[0].json;const content=source.replace('if (!rxLocal.test(q)) {','if (q.length > 40 || !rxLocal.test(q)) {');const proposal=run('Validate Proposal',{text:JSON.stringify({summary:'Length check',content,cases:[{query:'a'.repeat(41),errorCode:'ValidationError.INVALID_FILTER'}]})},{'Normalize Bug':event,'Prepare Fix':prepared})[0].json;const sha='c'.repeat(40);return {prepared,proposal,sha,values:{'Normalize Bug':event,'Prepare Fix':prepared,'Validate Proposal':proposal,'Commit Fix':{data:{createCommitOnBranch:{commit:{oid:sha}}}},'Open Fix PR':{number:10,html_url:'https://github.com/DaniilEF/Homework_7-8_AI/pull/10',head:{sha}}}};}
-test('compact graph has 23 nodes, valid links and executable expressions',()=>{
- assert.equal(workflow.nodes.length,23);assert.equal(nodes.size,23);
+test('compact graph has 24 nodes, valid links and executable expressions',()=>{
+ assert.equal(workflow.nodes.length,24);assert.equal(nodes.size,24);
  for(const [from,connections]of Object.entries(workflow.connections)){assert(nodes.has(from));for(const output of Object.values(connections))for(const group of output)for(const edge of group||[])assert(nodes.has(edge.node));}
  for(const n of nodes.values()){
   assert.equal(n.position.length,2);assert(n.position.every(Number.isFinite));
@@ -42,4 +42,26 @@ test('grouped merge-state keeps approval, current base/head and CI guards',()=>{
  assert.equal(run('Guard Merge',state,f.values)[0].json.payload.sha,f.sha);
  const changed=structuredClone(state);changed.data.repository.base.oid='d'.repeat(40);assert.throws(()=>run('Guard Merge',changed,f.values));
  const failed=structuredClone(state);failed.data.repository.candidate.checkSuites.nodes[0].checkRuns.nodes[0].conclusion='FAILURE';assert.throws(()=>run('Guard Merge',failed,f.values));
+});
+
+function renderBody(name,values){
+ const body=nodes.get(name).parameters.jsonBody;
+ assert(!body.startsWith('={{'),'GraphQL must be a JSON template');
+ return JSON.parse(body.replace(/{{([\s\S]*?)}}/g,(_,expression)=>vm.runInNewContext(expression,{$:key=>({first:()=>({json:values[key]})})})));
+}
+test('GraphQL JSON templates render valid bodies without nested expression delimiters',()=>{
+ const f=fixture();
+ const context=renderBody('Read Context',f.values);assert.equal(context.variables.branch,event.branch);assert(context.query.includes('file(path:"string-validator/ui/app.js")'));
+ const commit=renderBody('Commit Fix',f.values);assert.deepEqual(commit.variables.input.branch,{repositoryNameWithOwner:event.config.repo,branchName:event.branch});assert.equal(commit.variables.input.branch.refName,undefined);
+ const merge=renderBody('Read Merge State',f.values);assert.equal(merge.variables.head,f.sha);assert.equal(merge.variables.pr,10);
+});
+test('GraphQL HTTP-200 errors or missing commit SHA cannot reach PR creation',()=>{
+ assert.equal(workflow.connections['Commit Fix'].main[0][0].node,'Verify Commit');
+ assert.equal(workflow.connections['Verify Commit'].main[0][0].node,'Open Fix PR');
+ assert.throws(()=>run('Verify Commit',{errors:[{message:'branchName required'}]}),/branchName required/);
+ assert.throws(()=>run('Verify Commit',{data:null}),/did not confirm/);
+ const f=fixture();assert.equal(run('Verify Commit',f.values['Commit Fix'])[0].json.data.createCommitOnBranch.commit.oid,f.sha);
+});
+test('failed CI stops the pipeline before AI review',()=>{
+ const f=fixture();assert.throws(()=>run('Check CI',{total_count:1,check_runs:[{name:'autofix-contract',status:'completed',conclusion:'failure'}]},f.values),/CI failed/);
 });
