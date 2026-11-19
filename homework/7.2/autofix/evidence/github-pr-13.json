@@ -1,0 +1,66 @@
+{
+  "issue": {
+    "number": 12,
+    "html_url": "https://github.com/DaniilEF/Homework_7-8_AI/issues/12",
+    "state": "closed",
+    "title": "Поиск не учитывает регистр заглавных букв в запросе",
+    "closed_at": "2026-11-19T18:45:11Z"
+  },
+  "pr": {
+    "number": 13,
+    "html_url": "https://github.com/DaniilEF/Homework_7-8_AI/pull/13",
+    "merged": true,
+    "merged_at": "2026-11-19T18:45:09Z",
+    "merge_commit_sha": "cb08630cf374f94e1287e85539934bf3c9abf566"
+  },
+  "head_sha": "31ad06cbbe06e8a25a5dd953231d8ec6b4ac05af",
+  "base_sha": "139e7631eab4b8c679d58242277bddf37a2967ef",
+  "reviews": [
+    {
+      "html_url": "https://github.com/DaniilEF/Homework_7-8_AI/pull/13#pullrequestreview-5981162529",
+      "state": "COMMENTED",
+      "submitted_at": "2026-11-19T18:45:07Z",
+      "commit_id": "31ad06cbbe06e8a25a5dd953231d8ec6b4ac05af",
+      "body": "Independent AI review · openai/gpt-6-sol\n\nИсправление обеспечивает поиск без учёта регистра для `GA`; регрессионный пример добавлен. Прежний контракт сохранён, новых побочных действий и сетевых запросов нет.\n\n\nDecision: eligible for merge after final checks"
+    }
+  ],
+  "checks": [
+    {
+      "name": "autofix-contract",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "31ad06cbbe06e8a25a5dd953231d8ec6b4ac05af",
+      "details_url": "https://github.com/DaniilEF/Homework_7-8_AI/actions/runs/44591007334/job/135796686260"
+    },
+    {
+      "name": "policy-tests",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "31ad06cbbe06e8a25a5dd953231d8ec6b4ac05af",
+      "details_url": "https://github.com/DaniilEF/Homework_7-8_AI/actions/runs/44591007334/job/135796685871"
+    }
+  ],
+  "files": [
+    {
+      "filename": "automation/autofix/cases/issue-12.json",
+      "status": "added",
+      "additions": 12,
+      "deletions": 0,
+      "patch": "@@ -0,0 +1,12 @@\n+{\n+  \"issue\": 12,\n+  \"cases\": [\n+    {\n+      \"query\": \"GA\",\n+      \"expectedNames\": [\n+        \"Gamma\",\n+        \"Omega\"\n+      ]\n+    }\n+  ]\n+}"
+    },
+    {
+      "filename": "string-validator/ui/app.js",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "patch": "@@ -12,7 +12,7 @@ function filterItems(query, items) {\n     err.code = 'ValidationError.INVALID_FILTER';\n     throw err;\n   }\n-  const lower = q;\n+  const lower = q.toLowerCase();\n   return (items || []).filter(it => String(it.name || '').toLowerCase().includes(lower));\n }\n let allItems = [];"
+    }
+  ],
+  "n8n": {
+    "execution_id": 4729,
+    "status": "Succeeded",
+    "duration_seconds": 48.967,
+    "source": "User-provided screenshot 01-n8n-execution-4729-succeeded.png; no execution API export available"
+  },
+  "demo_defect": true
+}
