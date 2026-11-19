@@ -4,7 +4,7 @@ const rxValid = /^[a-zA-Z0-9\s]{0,40}$/;
 // Чистая функция фильтрации по контракту: бросает INVALID_FILTER при недопустимом вводе,
 // при пустом запросе возвращает исходный список, иначе — подстрочная фильтрация без учёта регистра
 function filterItems(query, items) {
-  const rxLocal = /^[a-zA-Z0-9\s]{0,40}$/;
+  const rxLocal = /^[a-zA-Z0-9 \t]{0,40}$/;
   const q = (query || '').toString();
   if (q === '') return items;
   if (!rxLocal.test(q)) {

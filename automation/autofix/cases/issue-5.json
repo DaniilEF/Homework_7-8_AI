@@ -1,0 +1,9 @@
+{
+  "issue": 5,
+  "cases": [
+    {
+      "query": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n",
+      "errorCode": "ValidationError.INVALID_FILTER"
+    }
+  ]
+}
