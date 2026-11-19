@@ -44,16 +44,20 @@ test('grouped merge-state keeps approval, current base/head and CI guards',()=>{
  const failed=structuredClone(state);failed.data.repository.candidate.checkSuites.nodes[0].checkRuns.nodes[0].conclusion='FAILURE';assert.throws(()=>run('Guard Merge',failed,f.values));
 });
 
-function renderBody(name,values){
+
+function requestBody(name,values){
  const body=nodes.get(name).parameters.jsonBody;
- assert(!body.startsWith('={{'),'GraphQL must be a JSON template');
- return JSON.parse(body.replace(/{{([\s\S]*?)}}/g,(_,expression)=>vm.runInNewContext(expression,{$:key=>({first:()=>({json:values[key]})})})));
+ assert.match(body,/^=\{\{ \$\('[^']+'\)\.first\(\)\.json\.[a-zA-Z]+ \}\}$/);
+ return JSON.parse(JSON.stringify(vm.runInNewContext('('+body.slice(3,-2)+')',{$:key=>({first:()=>({json:values[key]})})})));
 }
-test('GraphQL JSON templates render valid bodies without nested expression delimiters',()=>{
+test('GraphQL HTTP bodies are simple expressions referencing ready JSON objects',()=>{
  const f=fixture();
- const context=renderBody('Read Context',f.values);assert.equal(context.variables.branch,event.branch);assert(context.query.includes('file(path:"string-validator/ui/app.js")'));
- const commit=renderBody('Commit Fix',f.values);assert.deepEqual(commit.variables.input.branch,{repositoryNameWithOwner:event.config.repo,branchName:event.branch});assert.equal(commit.variables.input.branch.refName,undefined);
- const merge=renderBody('Read Merge State',f.values);assert.equal(merge.variables.head,f.sha);assert.equal(merge.variables.pr,10);
+ const normalized=run('Normalize Bug',{repository:{full_name:'DaniilEF/Homework_7-8_AI'},sender:{login:'DaniilEF'},action:'opened',issue:{number:12,state:'open',title:'Case insensitive',body:'GA returns no matches',labels:[{name:'bug'}]}})[0].json;
+ const context=requestBody('Read Context',{'Normalize Bug':normalized});
+ assert.equal(context.variables.branch,'autofix/issue-12');assert(context.query.includes('file(path:"string-validator/ui/app.js")'));
+ const commit=requestBody('Commit Fix',f.values);assert.deepEqual(commit.variables.input.branch,{repositoryNameWithOwner:event.config.repo,branchName:event.branch});assert.equal(commit.variables.input.branch.refName,undefined);
+ f.values['Validate Review']=run('Validate Review',{text:JSON.stringify({approve:true,summary:'Approved',findings:[]})},f.values)[0].json;
+ const merge=requestBody('Read Merge State',f.values);assert.equal(merge.variables.head,f.sha);assert.equal(merge.variables.pr,10);
 });
 test('GraphQL HTTP-200 errors or missing commit SHA cannot reach PR creation',()=>{
  assert.equal(workflow.connections['Commit Fix'].main[0][0].node,'Verify Commit');

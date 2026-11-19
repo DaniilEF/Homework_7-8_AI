@@ -478,7 +478,8 @@
   "active": true,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate"
+    "binaryMode": "separate",
+    "timezone": "Europe/Moscow"
   },
   "versionId": "f728e4ed-53ff-4035-9f8e-0eba99a9281a",
   "meta": {

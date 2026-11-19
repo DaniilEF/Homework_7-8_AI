@@ -10,6 +10,8 @@
 | 7.2 | [hw7.2.md](hw7.2.md) | [Workflows и подтверждения](homework/7.2/) |
 | 8 | [hw8.md](hw8.md) | [Прототип](homework/8/prototype/), [код](homework/8/frontend/), [workflow](homework/8/workflows/), [скриншоты](homework/8/evidence/), [результаты тестов](homework/8/test-evidence/) |
 
+Общий комплект и порядок показа: [DEFENSE.md](DEFENSE.md). Сверхрезультат 7.2: [успешный autofix, ревью и merge](homework/7.2/autofix/README.md).
+
 Для защиты ДЗ 8: [короткий порядок демонстрации](homework/8/defense.md), [PowerShell-команды](defense.ps1), [Makefile](Makefile).
 
 ## ДЗ 8: установка и запуск
