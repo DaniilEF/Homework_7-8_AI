@@ -12,7 +12,7 @@ function filterItems(query, items) {
     err.code = 'ValidationError.INVALID_FILTER';
     throw err;
   }
-  const lower = q;
+  const lower = q.toLowerCase();
   return (items || []).filter(it => String(it.name || '').toLowerCase().includes(lower));
 }
 let allItems = [];

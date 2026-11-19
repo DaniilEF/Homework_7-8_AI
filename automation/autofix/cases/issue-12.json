@@ -1,0 +1,12 @@
+{
+  "issue": 12,
+  "cases": [
+    {
+      "query": "GA",
+      "expectedNames": [
+        "Gamma",
+        "Omega"
+      ]
+    }
+  ]
+}
