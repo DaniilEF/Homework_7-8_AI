@@ -127,7 +127,7 @@
       "typeVersion": 1.2,
       "position": [
         1040,
-        180
+        220
       ],
       "parameters": {
         "model": {
@@ -246,8 +246,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1820,
-        420
+        2080,
+        0
       ],
       "parameters": {
         "url": "={{ 'https://api.github.com/repos/' + $('Normalize Bug').first().json.config.repo + '/pulls' }}",
@@ -287,8 +287,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1560,
-        420
+        2340,
+        0
       ],
       "parameters": {
         "resume": "timeInterval",
@@ -302,8 +302,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1300,
-        420
+        2600,
+        0
       ],
       "parameters": {
         "url": "={{ 'https://api.github.com/repos/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).config.repo + '/commits/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).sha + '/check-runs?per_page=100&filter=latest' }}",
@@ -340,8 +340,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1040,
-        420
+        2860,
+        0
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
@@ -354,8 +354,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        780,
-        420
+        3120,
+        0
       ],
       "parameters": {
         "conditions": {
@@ -388,8 +388,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.5,
       "position": [
-        520,
-        420
+        3380,
+        0
       ],
       "parameters": {
         "promptType": "define",
@@ -405,8 +405,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        520,
-        600
+        3380,
+        220
       ],
       "parameters": {
         "model": {
@@ -429,8 +429,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        260,
-        420
+        3640,
+        0
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
@@ -443,8 +443,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        0,
-        420
+        3900,
+        0
       ],
       "parameters": {
         "url": "={{ 'https://api.github.com/repos/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).config.repo + '/pulls/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).pr + '/reviews' }}",
@@ -484,8 +484,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        0,
-        840
+        4160,
+        0
       ],
       "parameters": {
         "conditions": {
@@ -518,8 +518,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        260,
-        840
+        4420,
+        0
       ],
       "parameters": {
         "url": "https://api.github.com/graphql",
@@ -559,8 +559,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        520,
-        840
+        4680,
+        0
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
@@ -573,8 +573,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        780,
-        840
+        4940,
+        0
       ],
       "parameters": {
         "url": "={{ 'https://api.github.com/repos/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).config.repo + '/pulls/' + ({...$('Validate Proposal').first().json,sha:$('Commit Fix').first().json.data.createCommitOnBranch.commit.oid,pr:$('Open Fix PR').first().json.number,pr_url:$('Open Fix PR').first().json.html_url}).pr + '/merge' }}",
@@ -614,8 +614,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1040,
-        840
+        5200,
+        0
       ],
       "parameters": {
         "mode": "runOnceForAllItems",
