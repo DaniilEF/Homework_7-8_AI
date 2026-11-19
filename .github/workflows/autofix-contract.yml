@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: node --test automation/autofix/policy.test.cjs
+      - run: node --test automation/autofix/policy.test.cjs automation/autofix/workflow.test.cjs
   autofix-contract:
     if: startsWith(github.head_ref, 'autofix/issue-')
     runs-on: ubuntu-latest
