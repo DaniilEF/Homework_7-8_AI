@@ -30,3 +30,19 @@ test('original whitespace behavior is preserved (tabs/newlines accepted by regex
 test('filter does not mutate source list', () => {
   const before=JSON.stringify(items);filterItems('a',items);assert.equal(JSON.stringify(items),before);
 });
+test('mixed-case query matches without regard to case', () => {
+  const result = filterItems('aLp', items);
+  assert.deepEqual(Array.from(result, item => item.name), ['Alpha']);
+});
+
+test('leading spaces are preserved, not trimmed', () => {
+  const result = filterItems(' alp', items);
+  assert.equal(result.length, 0);
+});
+
+test('41 spaces exceed the maximum query length', () => {
+  assert.throws(
+    () => filterItems(' '.repeat(41), items),
+    error => error.code === 'ValidationError.INVALID_FILTER'
+  );
+});
