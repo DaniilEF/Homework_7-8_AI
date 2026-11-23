@@ -13,6 +13,16 @@ test('case-insensitive substring filtering', () => {
   assert.equal(filterItems('alp',items)[0].name, 'Alpha');
   assert.equal(filterItems('GA',items)[0].name, 'Gamma');
 });
+
+test('uppercase query matches Beta', () => {
+  const result = filterItems('BETA', items);
+
+  assert.deepEqual(
+    Array.from(result, item => item.name),
+    ['Beta']
+  );
+});
+
 test('empty query returns original list', () => assert.equal(filterItems('',items),items));
 test('valid query with no matches returns empty array', () => assert.equal(filterItems('zzz',items).length,0));
 test('invalid characters and Cyrillic reject with contract error', () => {
@@ -29,4 +39,9 @@ test('original whitespace behavior is preserved (tabs/newlines accepted by regex
 });
 test('filter does not mutate source list', () => {
   const before=JSON.stringify(items);filterItems('a',items);assert.equal(JSON.stringify(items),before);
+});
+test('filtering an empty list returns no matches', () => {
+  const result = filterItems('alp', []);
+
+  assert.equal(result.length, 0);
 });
